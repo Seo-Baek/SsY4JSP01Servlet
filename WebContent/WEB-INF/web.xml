@@ -10,9 +10,12 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
+  	<!-- servlet-name 태그 : 임의의 이름을 만들어 주면 됨. -->
     <servlet-name>test01</servlet-name>
+    <!-- servlet-class 태그 : 클라이언트와 매핑할 서블릿 이름 ==> 패키지명을 포함해서 기술 -->
     <servlet-class>com.sist.AdderServlet</servlet-class>
   </servlet>
+  <!-- servlet-mapping 태그 : 클라이언트와 서블릿 매핑 -->
   <servlet-mapping>
     <servlet-name>test01</servlet-name>
     <url-pattern>/adder1</url-pattern>
