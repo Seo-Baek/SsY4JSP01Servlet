@@ -1,5 +1,5 @@
 package com.sist;
-
+//20-03-09
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -10,7 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdderServlet
+ * 서블릿 생명 주기(Life Cycle)
+ * Servlet 객체 생성 → init() 메서드 호출 → service(), doGet(), doPost() 메서드 호출 → destroy() 메서드 호출
+ *   (최초 한 번)        (최초 한 번)                   (요청 시 매번)                    (마지막 한 번)
+ * 
+ * - 서버(서블릿)에서 웹 브라우저로 데이터를 전송할 때에는 어떤 종류의 데이터를 전송하는지 웹 브라우저에게 알려 주어야 함.
+ *   => 이유 : 웹 브라우저가 전송 받을 데이터의 종류를 미리 알고 있으면 더 빠르게 처리할 수 있기 때문임.
+ * - 데이터 종류(MIME-TYPE) : 톰캣 컨테이너에서 미리 제공하는 여러 가지 전송 데이터 종류를 하나 지정하여 웹 브라우저로 전송.
+ *                         이처럼 톰캣 컨테이네에서 미리 설정해 놓은 데이터의 종류들을 말함.
+ *                         웹 브라우저는 기본적으로 HTML만 인식하므로 서블릿에서 전송하는 대부분의 데이터는
+ *                         MIME-TYPE을 "text/html"로 설정을 함.
+ * - 서블릿이 클라이언트(웹 브라우저)에 응답하는 과정.
+ *   * setContentType()을 이용해서 MIME-TYPE을 지정함.
+ *   * 데이터를 출력할 PrintWriter 객체를 생성함.
+ *   * 출력 데이터를 HTML 형식으로 만듬.
+ *   * PrintWriter 객체의 print()나 println() 메서드를 이용해 데이터를 출력함.
+
  */
 @WebServlet("/AdderServlet")
 public class AdderServlet extends HttpServlet {

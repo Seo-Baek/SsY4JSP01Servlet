@@ -38,6 +38,47 @@
 	  한 개에 해당하는 메모리만 사용함.(스레드 방식!) 그래서 CGI 방식에 비해 메모리 사용량이 적다.
 	  주로 사용하는 언어: ASP, PHP, JSP(셋 다 웹 스크립트 언어임!)
 
+
+서블릿 API 계층 구조와 기능.
+
+     Servlet                  ServletConfig
+         ^                           ^
+         |                           |
+         |                           |
+         |                           |
+         ----- GenericServlet --------   추상클래스
+                      ^
+                      |
+                      |
+                      |
+                 HttpServlet
+
+	- Servlet 인터페이스 
+	  * javax.servlet 패키지에 선언되어 있음.
+	  * Servlet 관련 추상 메서드가 선언되어 있음.
+	  * init(), service(), destory(), getServletInfo(), getServletConfig()
+	- ServletConfig 인터페이스
+	  * javax.servlet 패키지에 선언되어 있음.
+	  * Servlet 관련 추상 메서드가 선언되어 있음.
+	  * getInitParameter(), getInitParmeterNames(), getServletContext(), getServletName()
+	- GenericServlet 추상클래스
+	  * javax.servlet 패키지에 선언되어 있음.
+	  * 상위 두 인터페이스를 구현하여 일반적인 서블릿 기능을 구현한 클래스임.
+	  * GenericServlet을 상속받아 구현한 사용자 서블릿은 각각 service()를 오버라이딩해서 구현을 함.
+	- HttepServlet 클래스
+	  * javax.servlet.http 패키지에 선언되어 있음.
+	  * GenericServlet을 상속을 받아 HTTP 프로토콜을 사용하는 웹 브라우저에서 서블릿 기능을 수행함.
+	  * 웹 브라우저 기반 서비스를 제공하는 서블릿을 만들 때 상속을 받아 사용함.
+	  * 요청 시 service()가 호출되면서 요청 방식에 따라 doGet()이나 doPost()가 차례로 호출이 됨.
+
+
+Servlet 동작 과정
+	- 클라이언트1이 요청을 하면 요청하는 서블릿이 메모리에 로딩되어 있는지 확인을 함.
+	- 최초의 요청이므로 init() 메서드를 호출하여 요청하는 클래스 인스턴스(객체)를 메모리에 로딩함.
+	- 그런 다음 doGet() 이나 doPost() 메서드를 호출하여 서비스를 함.
+	- 클라이언트2가 다시 동일한 서블릿을 요청을 하면 톰캣은 요청하는 서블릿이 메모리에 로딩되어 있는지 확인을 함.
+	- 이번에는 메모리에 이미 로딩되어 있는 것이 확인되므로 바로 doGet()나 doPost() 메서드를 호출함.
+
 	*JSP에서 사용되는 동작 방식 2가지   
 		1. Servlet 방식
 			- 웹 개발을 위한 표준이 되는 클래스
@@ -56,6 +97,8 @@ MVC(Model View Controller)
 Model : DAO DTO(VO)
 View: JSP HTML
 Controller: Servlet
+   
+   
    
 	2. JSP 방식 (이건 뭐지 했는데 서블릿 방식을 보완한 거래.)
          
